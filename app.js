@@ -1,8 +1,9 @@
 const express = require("express");
 const morgan = require("morgan");
+const router = express.Router();
 const app = express();
 const { db, Page, User } = require("./models");
-const wikiRouter = require("./routes/users");
+const wikiRouter = require("./routes/wiki");
 const usersRouter = require("./routes/users");
 
 app.use(express.static(__dirname + "/public"));
@@ -18,8 +19,6 @@ app.get("/", async (req, res) => {
 db.authenticate().then(() => {
   console.log("connected to the database");
 });
-
-module.exports = app;
 
 const init = async () => {
   await db.sync({ force: true });
